@@ -6,6 +6,7 @@ function handlePlayerTurn(clickedCellIndex) {
     if (gameBoard[clickedCellIndex] !== '' || !gameActive) {
         return;
     }
+
     gameBoard[clickedCellIndex] = currentPlayer;
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
   }
@@ -17,23 +18,27 @@ function handlePlayerTurn(clickedCellIndex) {
   cells.forEach(cell => {
     cell.addEventListener('click', cellClicked, false);
   });
+
   function cellClicked(clickedCellEvent) {
     const clickedCell = clickedCellEvent.target;
     const clickedCellIndex = parseInt(clickedCell.id.replace('cell-', '')) - 1;
    
     if (gameBoard[clickedCellIndex] !== '' || !gameActive) {
         return;
+
     }
   
   
     handlePlayerTurn(clickedCellIndex);
     updateUI();
+
   }
 
   function updateUI() {
     for (let i = 0; i < cells.length; i++) {
         cells[i].innerText = gameBoard[i];
     }
+
   }
 
   const winConditions = [
@@ -65,22 +70,27 @@ function handlePlayerTurn(clickedCellIndex) {
     }
   
     let roundDraw = !gameBoard.includes('');
+
     if (roundDraw) {
         announceDraw();
         gameActive = false;
         return;
     }
+
   }
+
   function announceWinner(player) {
     const messageElement = document.getElementById('gameMessage');
     messageElement.innerText = `Player ${player} Wins!`;
   }
   
-  function announceDraw() {
+  function announceDraw() 
+  {
     const messageElement = document.getElementById('gameMessage');
     messageElement.innerText = 'Game Draw!';
   }
-  function resetGame() {
+  function resetGame()
+   {
     gameBoard = ['', '', '', '', '', '', '', '', '']; // Clear the game board
     gameActive = true; // Set the game as active
     currentPlayer = 'X'; // Reset to player X
@@ -88,7 +98,13 @@ function handlePlayerTurn(clickedCellIndex) {
     cells.forEach(cell => {
         cell.innerText = '';
     });
+
     document.getElementById('gameMessage').innerText = '';
   }
+
   const resetButton = document.getElementById('resetButton');
   resetButton.addEventListener('click', resetGame, false);
+
+
+
+  
